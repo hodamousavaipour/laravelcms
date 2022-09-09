@@ -47,6 +47,8 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
+CMD php artisan serve --host=0.0.0.0
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
