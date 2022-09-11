@@ -21,8 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    //Route::get('/api/user-info', UserController::class,'userInfo');
-    //Route::resource('/api/vocabulary', VocabController::class);
-    Route::resource('user', UserController::class);
+// Route::middleware(['auth:sanctum'])->group(function () {
+//     //Route::get('/api/user-info', UserController::class,'userInfo');
+//     //Route::resource('/api/vocabulary', VocabController::class);
+//     Route::resource('/user', UserController::class);
+// });
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/users',[RegisterController::class,'index'])->name('index');
 });
