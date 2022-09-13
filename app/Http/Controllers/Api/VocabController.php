@@ -2,40 +2,50 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use App\Http\Requests\UserRequest;
+use App\Models\Vocab;
+use App\Http\Requests\VocabRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\VocabResource;
+use Carbon\Carbon;
 
-class UserController extends Controller
+
+class VocabController extends Controller
 {
     public function index()
     {
-        return UserResource::collection(User::all());
+        return VocabResource::collection(Vocab::paginate(25));
     }
 
-    public function store(UserRequest $request)
+    public function store(VocabRequest $request)
     {
-        $User = User::create($request->validated());
+        $current_datetime = Carbon::now();
 
-        return new UserResource($User);
+        $Vocab = Vocab::create([
+            'user_id' => $request->user()->id,
+            'title' => $request->title,
+            'last_seen' => $current_datetime,
+            'last_status' => 'new',
+            'repeat_number' => 0,
+          ]);
+    
+          return new VocabResource($Vocab);
     }
 
-    public function show(User $User)
+    public function show(Vocab $Vocab)
     {
-        return new UserResource($User);
+        return new VocabResource($Vocab);
     }
 
-    public function update(UserRequest $request, User $User)
+    public function update(VocabRequest $request, Vocab $Vocab)
     {
-        $User->update($request->validated());
+        $Vocab->update($request->validated());
 
-        return new UserResource($User);
+        return new VocabResource($Vocab);
     }
 
-    public function destroy(User $User)
+    public function destroy(Vocab $Vocab)
     {
-        $User->delete();
+        $Vocab->delete();
 
         return response()->noContent();
     }

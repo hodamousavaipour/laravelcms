@@ -14,6 +14,15 @@ class VocabResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'last_seen' => $this->description,
+            'last_status' => $this->last_status,
+            'repeat_number' => $this->repeat_number,
+            'created_at' => (string) $this->created_at,
+            'updated_at' => (string) $this->updated_at,
+            'user' => $this->user,
+          ];
     }
 }

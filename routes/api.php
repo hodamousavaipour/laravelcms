@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\VocabController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-// Route::middleware(['auth:sanctum'])->group(function () {
-//     //Route::get('/api/user-info', UserController::class,'userInfo');
-//     //Route::resource('/api/vocabulary', VocabController::class);
-//     Route::resource('/user', UserController::class);
-// });
-
-Route::middleware('auth:sanctum')->group(function() {
-    Route::get('/users',[RegisterController::class,'index'])->name('index');
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('/vocab', VocabController::class);
+    //Route::resource('/user', UserController::class);
 });
+
