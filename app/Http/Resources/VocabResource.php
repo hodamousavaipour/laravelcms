@@ -23,6 +23,7 @@ class VocabResource extends JsonResource
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'user' => $this->user,
+            'meanings' => $this->meanings,
           ];
     }
 }
