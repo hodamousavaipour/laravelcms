@@ -43,21 +43,27 @@ class VocabController extends Controller
         return new VocabResource($vocab);
     }
 
-    public function show(Vocab $Vocab)
+    public function show(Vocab $vocab)
     {
-        return new VocabResource($Vocab);
+        return new VocabResource($vocab);
     }
 
-    public function update(VocabRequest $request, Vocab $Vocab)
+    public function update(VocabRequest $request, Vocab $vocab)
     {
-        $Vocab->update($request->validated());
+        $vocab->update($request->validated());
 
-        return new VocabResource($Vocab);
+        $vocab_meanings = $request->input('meaning', []);
+        for ($vocab_meaning = 0; $vocab_meaning < count($vocab_meanings); $vocab_meaning++) {
+            if ($vocab_meanings[$vocab_meaning] != '') {
+                $vocab->meanings()->create($vocab_meanings[$vocab_meaning]);
+            }
+        }
+        return new VocabResource($vocab);
     }
 
-    public function destroy(Vocab $Vocab)
+    public function destroy(Vocab $vocab)
     {
-        $Vocab->delete();
+        $vocab->delete();
 
         return response()->noContent();
     }

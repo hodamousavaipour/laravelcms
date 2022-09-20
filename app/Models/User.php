@@ -45,4 +45,33 @@ class User extends Authenticatable
     {
       return $this->hasMany(Vocab::class);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function withRoles($roleId)
+    {
+        return $this->belongsToMany(Role::class)->wherePivot('role_id', '=', $roleId);
+    }
+
+    public function permissions($userId)
+    {
+        $permissions=[];
+        foreach ($this->roles as $role)
+        {
+            if($role->pivot->user_id==$userId){
+
+                foreach($role->permissions as $permission)
+                {
+                    $permissions[]=$permission->title.$permission->pivot->model_name;
+                }
+
+            }
+
+        }
+
+        return collect($permissions);
+   }
 }

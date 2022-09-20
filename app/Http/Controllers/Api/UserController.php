@@ -16,9 +16,14 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $User = User::create($request->validated());
-
-        return new UserResource($User);
+        $user = User::create($request->validated());
+        $permissions = $request->input('permission', []);
+        for ($permission = 0; $permission < count($permissions); $permission++) {
+            if ($permissions[$permission] != '') {
+                $user->meanings()->create($permissions[$permission]);
+            }
+        }
+        return new UserResource($user);
     }
 
     public function show(User $User)
