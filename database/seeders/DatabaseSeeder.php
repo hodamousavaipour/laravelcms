@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             VocabSeeder::class,
             VocabMeaningSeeder::class,
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            UserRoleSeeder::class,
+            ModelPermissionRoleSeeder::class,
         ]);
     }
 }
