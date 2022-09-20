@@ -17,7 +17,7 @@ class VocabController extends Controller
         //return response()->json($user);
         $user_id = Auth::id();
         $vocabs = Vocab::where('user_id', '=', $user_id);
-        return VocabResource::collection($vocabs->paginate(5));
+        return VocabResource::collection($vocabs->paginate(10));
     }
 
     public function store(VocabRequest $request)
