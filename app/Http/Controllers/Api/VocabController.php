@@ -50,14 +50,22 @@ class VocabController extends Controller
 
     public function update(VocabRequest $request, Vocab $vocab)
     {
+
         $vocab->update($request->validated());
 
         $vocab_meanings = $request->input('meaning', []);
-        for ($vocab_meaning = 0; $vocab_meaning < count($vocab_meanings); $vocab_meaning++) {
-            if ($vocab_meanings[$vocab_meaning] != '') {
-                $vocab->meanings()->create($vocab_meanings[$vocab_meaning]);
+        foreach ($vocab_meanings as $vm) {
+            if($vm['type']!=''||$vm['meaning']||$vm['sample']){
+                
+                $vocab->meanings()->update([
+                    'type' => $vm['type'],
+                    'meaning' => $vm['meaning'],
+                    'sample' => $vm['sample'],
+                ]);
             }
+            
         }
+
         return new VocabResource($vocab);
     }
 

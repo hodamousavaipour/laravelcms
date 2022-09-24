@@ -18,9 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('vocab_id');
             $table->foreign('vocab_id')->references('id')->on('vocabs')->onDelete('cascade');
             $table->enum('type',['noun','adjective','verb','adverb','pronoun','preposition', 'conjunction','interjection']);
-            $table->string('meaning')->nullable();
-            $table->string('sample')->nullable();
-            $table->timestamps();
+            $table->string('meaning',1024)->nullable();
+            $table->string('sample',1024)->nullable();
         });
     }
 

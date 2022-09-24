@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->timestamp('last_seen');
-            $table->enum('last_status',['know','learning','new']);
+            $table->enum('last_status',['sure','notsure','notknow']);
             $table->smallInteger('repeat_number');
             $table->timestamps();
         });

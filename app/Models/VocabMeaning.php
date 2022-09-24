@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class VocabMeaning extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $fillable = ['vocab_id','type','meaning','sample'];
 
 
