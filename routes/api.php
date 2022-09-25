@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/vocab', VocabController::class);
-    //Route::resource('/user', UserController::class);
+    Route::put('/score', [VocabController::class, 'score']);
+
 });
 

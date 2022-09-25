@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class VocabResource extends JsonResource
@@ -14,6 +15,7 @@ class VocabResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user_id = Auth::id();
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -23,7 +25,9 @@ class VocabResource extends JsonResource
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'user' => $this->user,
+            'user_id' => $this->user_id,
             'meanings' => $this->meanings,
+
           ];
     }
 }
