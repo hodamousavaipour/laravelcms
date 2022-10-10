@@ -30,7 +30,7 @@ class VocabController extends Controller
             'user_id' => $request->user()->id,
             'title' => $request->title,
             'last_seen' => $current_datetime,
-            'last_status' => 'new',
+            'last_status' => 'notknow',
             'repeat_number' => 0,
         ]);
 
